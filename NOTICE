@@ -1,0 +1,6 @@
+gitevolved
+Copyright 2026 do, inc
+
+This product is licensed under the Apache License, Version 2.0 (see the LICENSE
+file). It is the open-source local client of doSource — it shells out to stock
+git via os/exec and never links git internals.
