@@ -1,30 +1,49 @@
 # gitevolved
 
-> A semantic, offline-first local engine for source control that understands your
-> code as **typed operations**, not text diffs — the open-source front door to
-> [doSource](https://gitevolved.ai).
+> **git that merges by what changed, not by text lines** — so non-overlapping edits
+> to the same file merge automatically, no conflict. Your team and your AI agents
+> work on the same code at once and stay in sync. Still git: `git push origin`
+> works exactly as today. Free, open-source, Apache-2.0. — [gitevolved.ai](https://gitevolved.ai) · [docs](https://docs.gitevolved.ai)
 
-`gitevolved` is the free, Apache-2.0-licensed local core of doSource. It runs
-fully on your laptop, depends only on the Go standard library, and shells out to
-**stock `git`** for interop — it never forks or links git internals, so there is
-no GPL contagion. The headline: it teaches git a smarter transport so
-`git clone dosource://…` and `git push dosource://…` Just Work, with **`git push
-origin` left completely untouched.**
+## Why
+
+Git merges text line-by-line, so it flags a conflict whenever two edits land near
+each other — **even when they don't actually clash.** You change the top of a file,
+your teammate changes the bottom, and git still makes someone untangle it by hand.
+Now add AI: one developer runs several coding agents, all editing the same repo,
+faster than anyone can merge them.
+
+gitevolved records what you **did** — added a function, renamed a symbol, rewrote a
+block — as a structured operation, not just which lines moved. Edits to different
+parts of a file are different operations, so they combine cleanly and both land.
+Edits that genuinely change the *same* code still ask a human — gitevolved just
+stops inventing the conflicts that never needed to happen. Underneath it shells out
+to your real, installed `git` (never forks it), so `clone`/`commit`/`push` behave as
+you expect and `git push origin` to GitHub is untouched. Depends only on the Go
+standard library.
 
 ## Install
 
+**Let your AI agent do it** — paste to Claude Code / Codex / Gemini / any coding agent:
+
+> Install gitevolved from github.com/do-awesome-ai/gitevolved, then make sure `git clone dosource://cloud/<repo>` works.
+
+It reads [`AGENTS.md`](./AGENTS.md) and runs the steps. Or do it yourself:
+
 ```sh
-# One step: build + install all three binaries (Go 1.26+; no node, no npm, no
-# cloud account). Installs to $HOME/.local/bin by default (--prefix to change).
-./install.sh
-# then add the prefix to PATH if it isn't already (the installer tells you):
-export PATH="$HOME/.local/bin:$PATH"
-# uninstall any time: ./install.sh --uninstall
+# One command per tool (needs Go 1.26+). No node, no npm, no cloud account.
+go install github.com/do-awesome-ai/gitevolved/cmd/git-remote-dosource@latest
+go install github.com/do-awesome-ai/gitevolved/cmd/gitevolved@latest
+go install github.com/do-awesome-ai/gitevolved/cmd/dosourced@latest
+export PATH="$(go env GOPATH)/bin:$PATH"   # if not already on PATH
 ```
 
+No Go? Download the prebuilt archive for your OS/arch from the
+[latest release](https://github.com/do-awesome-ai/gitevolved/releases/latest) and
+put the three binaries on PATH. Or clone + build: `./install.sh` (`--uninstall` to revert).
+
 `git-remote-dosource` must keep that exact filename on `PATH` — git derives the
-remote-helper from the `dosource://` scheme. The installer handles this; if you
-build by hand (below), keep the output name.
+remote-helper from the `dosource://` scheme.
 
 ## Quickstart
 

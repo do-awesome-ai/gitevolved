@@ -1,0 +1,25 @@
+# gitevolved
+
+> git that merges by what changed (operations like "added a function", "renamed a
+> symbol") instead of by text lines — so non-overlapping edits to the same file
+> merge automatically, with no conflict. Your team and your AI agents work on the
+> same codebase at once and stay in sync. It is still git: `git push origin` to
+> GitHub works exactly as before. Free, open-source, Apache-2.0. The local client
+> is free forever; a paid hosted cloud keeps teams in sync.
+
+Honest scope: only edits that DON'T overlap the same code merge automatically;
+genuinely-overlapping edits still ask a human. gitevolved just stops inventing the
+conflicts that never needed to happen.
+
+## Install (for an AI agent)
+Read AGENTS.md and follow it. Short version:
+- With Go: `go install github.com/do-awesome-ai/gitevolved/cmd/git-remote-dosource@latest`
+  (and `cmd/gitevolved`, `cmd/dosourced`); ensure `$(go env GOPATH)/bin` on PATH.
+- Without Go: download the prebuilt archive for the OS/arch from the latest GitHub
+  release and put the three binaries on PATH (keep `git-remote-dosource`'s name).
+- Verify: `git-remote-dosource --version`.
+
+## Docs
+- Full documentation: https://docs.gitevolved.ai
+- Source + releases: https://github.com/do-awesome-ai/gitevolved
+- Agent install recipe: AGENTS.md in the repo root
