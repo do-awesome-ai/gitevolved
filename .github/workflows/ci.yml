@@ -1,0 +1,145 @@
+# CI for gitevolved — build, vet, gofmt, and the full test suite on every push + PR.
+# Pure Go stdlib + stock git (preinstalled on the runner); no secrets, no cloud.
+# The Go version tracks go.mod so CI never drifts from the module's declared version.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: gofmt (fail if any file is unformatted)
+        run: |
+          unformatted="$(gofmt -l .)"
+
+✅ DEPLOYED + PROD-SMOKE-VERIFIED — gitevolved v0.1.0
+# The Go version tracks go.mod so CI never drifts from the module's declared version.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: gofmt (fail if any file is unformatted)
+        run: |
+          unformatted="$(gofmt -l .)"
+          if [ -n "$unformatted" ]; then
+            echo "These files are not gofmt-clean:"
+            echo "$unformatted"
+            exit 1
+          fi
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: go build
+        run: go build ./...
+
+      - name: go test (race)
+        run: go test -race ./...
+ not a follow-up wiring step.
+
+All four are documented with exact unblock steps in ACTIVE-WORK.md (la published, released at v0.1.0, and clean; the remaining items are aone-command scope grant (CI), an architecture decision (multi-branch), and a net-new site (landing) — none of which are mine to force. If you grant the workflow scope,
+I'll finish CI in one pass; if you want, I can spec the multi-mainlineyou to decide from.
+y + prod-smoke receipt (the command + its
+      output, or a `Deployed-Prod:` / `Prod-Smoke:` line, or the live prod URL).
+    • If it is NOT deployed: restate honestly — "landed on main, NOT dep
+rod-smoke receipt for what's actually live (a fresh clone-build of the live tip), rather than leaning on an earlier one:
+
+  Ran 1 shell command
+
+
+- CI workflow — ci.yml is committed in the monorepo and proven green, d NOT running. Blocked: the do-awesome-ai token lacks GitHub's workflow
+t exist (no site, domain doesn't resolve). Remains: build + deploy a site + configure the domain — a separate project.
+- Full multi-branch push — not built. Remains: the closed-side push-to-arbitrary-ref change + the multi-mainline coordination decision (a moat-architecture call that's
+yours).it in-session and I'll finish the instant it lands. First, confirm exactly what's missing:
+
+  Ran 1 shell command
+
+Zero-auth fallback if you'd rather not touch scopes: add the workflow through GitHub's web UI — the in-browser commit path is allowed without the workflow token scope:
+1. https://github.com/do-awesome-ai/gitevolved → Add file → Create new
+
+Clean copy block — paste this as .github/workflows/ci.yml:
+
+lled on the runner); no secrets, no cloud.
+
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v5
+          cache: true
+
+      - name: gofmt (fail if any file is unformatted)
+        run: |
+            echo "These files are not gofmt-clean:"
+            echo "$unformatted"
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: go build
+        run: go build ./...
+
+      - name: go test (race)
+        run: go test -race ./...
+
+2. Filename: .github/workflows/ci.yml (typing the slashes creates the folders)
+3. Paste the block above → Commit changes to main
+
+The push to main triggers the run immediately — check the Actions tab.
+
+One thing to watch on the first run: go-version-file: go.mod tells the runner to use the module's declared Go (go 1.26.1). If GitHub's runners don't yet have 1.26, the setup-go step will fail — if that happe
+  # The Go version tracks go.mod so CI never drifts from the module's declared version.
+  name: ci
+
+  on:
+    push:
+      branches: [main]
+    pull_request:
+
+  permissions:
+    contents: read
+
+  jobs:
+    build-test:
+      runs-on: ubuntu-latest
+      steps:
