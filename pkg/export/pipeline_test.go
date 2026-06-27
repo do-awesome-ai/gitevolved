@@ -12,9 +12,9 @@
 //
 // # Thesis claims proven here
 //
-//   TP1. SingleSessionExport       project 3 ops → export → git tree matches
-//   TP3. EmptyOps                  empty ops → empty state → --allow-empty commit
-//   TP4. DeleteFile                AddFile + DeleteFile → export → file absent in HEAD
+//	TP1. SingleSessionExport       project 3 ops → export → git tree matches
+//	TP3. EmptyOps                  empty ops → empty state → --allow-empty commit
+//	TP4. DeleteFile                AddFile + DeleteFile → export → file absent in HEAD
 //
 // TP2 (MultiSessionComposition) lives platform-side at
 // internal/dosource/opdag/export_pipeline_integration_test.go — it composes the
@@ -272,4 +272,3 @@ func TestThesis_Pipeline_DeleteFile(t *testing.T) {
 		t.Errorf("ephemeral.go still tracked in HEAD after delete pipeline:\n%s", treeOut)
 	}
 }
-

@@ -18,10 +18,10 @@
 //
 // # Handler list (11 ops)
 //
-//   Declaration-level: handleAddDecl, handleEditDecl, handleDeleteDecl, handleRenameSymbol
-//   Function-level:    handleAddFunction, handleDeleteFunction, handleRewriteFunction
-//   Import-level:      handleAddImport, handleRemoveImport, handleEditImport
-//   Sub-function:      handleEditStatement
+//	Declaration-level: handleAddDecl, handleEditDecl, handleDeleteDecl, handleRenameSymbol
+//	Function-level:    handleAddFunction, handleDeleteFunction, handleRewriteFunction
+//	Import-level:      handleAddImport, handleRemoveImport, handleEditImport
+//	Sub-function:      handleEditStatement
 package projector
 
 import (

@@ -3,16 +3,16 @@
 //
 // # Thesis claims proven here
 //
-//   T9.  ExtractAddFunction_DetectsNewFunc        — new func in post → AddFunction
-//   T10. ExtractDeleteFunction_DetectsMissingFunc — func in pre absent from post → DeleteFunction
-//   T11. ExtractRewriteFunction_SameSignatureDiffBody — same name, body changed → RewriteFunction
-//   T12. ExtractAddImport_DetectsNewModule        — new import line → AddImport
-//   T13. ExtractRemoveImport_DetectsMissingModule — removed import line → RemoveImport
-//   T14. ExtractRenameSymbol_PureSubstitution     — all diffs are one word→another → RenameSymbol
-//   T15. ExtractFallsBackToRewriteRegion_OnAmbiguity — complex edit → RewriteRegion
-//   T16. ExtractRoundTripInvariant_AlwaysHolds    — for ANY extracted op, project(pre, op) == post
-//   T17. ExtractAddDecl_DetectsNewDecl            — new type/const/var → AddDecl
-//   T18. ExtractDeleteDecl_DetectsRemovedDecl     — removed type/const/var → DeleteDecl
+//	T9.  ExtractAddFunction_DetectsNewFunc        — new func in post → AddFunction
+//	T10. ExtractDeleteFunction_DetectsMissingFunc — func in pre absent from post → DeleteFunction
+//	T11. ExtractRewriteFunction_SameSignatureDiffBody — same name, body changed → RewriteFunction
+//	T12. ExtractAddImport_DetectsNewModule        — new import line → AddImport
+//	T13. ExtractRemoveImport_DetectsMissingModule — removed import line → RemoveImport
+//	T14. ExtractRenameSymbol_PureSubstitution     — all diffs are one word→another → RenameSymbol
+//	T15. ExtractFallsBackToRewriteRegion_OnAmbiguity — complex edit → RewriteRegion
+//	T16. ExtractRoundTripInvariant_AlwaysHolds    — for ANY extracted op, project(pre, op) == post
+//	T17. ExtractAddDecl_DetectsNewDecl            — new type/const/var → AddDecl
+//	T18. ExtractDeleteDecl_DetectsRemovedDecl     — removed type/const/var → DeleteDecl
 package extract
 
 import (

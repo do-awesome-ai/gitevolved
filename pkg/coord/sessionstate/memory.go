@@ -30,9 +30,9 @@ var ErrNotFound = errors.New("dosource/sessionstate: not found")
 // for production-clock behavior, or NewMemoryStoreWithClock(now) for
 // deterministic tests.
 type MemoryStore struct {
-	mu    sync.RWMutex
-	now   func() time.Time
-	rows  map[string]*State // key: tenantID + ":" + sessionID
+	mu   sync.RWMutex
+	now  func() time.Time
+	rows map[string]*State // key: tenantID + ":" + sessionID
 }
 
 // NewMemoryStore returns a fresh empty MemoryStore using time.Now.

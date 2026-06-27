@@ -2,15 +2,15 @@
 //
 // # Thesis claims proven here
 //
-//   T1. AddFileFromNilPre        pre=nil + post != nil → AddFile{Content: post}
-//   T2. DeleteFileFromNilPost    pre != nil + post=nil → DeleteFile
-//   T3. NoChangeReturnsError     pre == post → ErrNoChange
-//   T4. EmptyInputReturnsError   pre=nil + post=nil → ErrEmpty
-//   T5. MinimalRangeExtraction   change in middle → RewriteRegion of just the changed bytes
-//   T6. ExtractionProjectsBack   ∀ (pre, post) → project(pre, extract(pre, post)) == post
-//                                (LOAD-BEARING — architect ship-blocker 1.1)
-//   T7. ExtractedOpValidates     every extracted op passes Operation.Validate()
-//   T8. ContentDeepCopied        mutating caller's post array doesn't leak into extracted op
+//	T1. AddFileFromNilPre        pre=nil + post != nil → AddFile{Content: post}
+//	T2. DeleteFileFromNilPost    pre != nil + post=nil → DeleteFile
+//	T3. NoChangeReturnsError     pre == post → ErrNoChange
+//	T4. EmptyInputReturnsError   pre=nil + post=nil → ErrEmpty
+//	T5. MinimalRangeExtraction   change in middle → RewriteRegion of just the changed bytes
+//	T6. ExtractionProjectsBack   ∀ (pre, post) → project(pre, extract(pre, post)) == post
+//	                             (LOAD-BEARING — architect ship-blocker 1.1)
+//	T7. ExtractedOpValidates     every extracted op passes Operation.Validate()
+//	T8. ContentDeepCopied        mutating caller's post array doesn't leak into extracted op
 package extract
 
 import (

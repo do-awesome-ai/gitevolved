@@ -3,15 +3,15 @@
 //
 // # Thesis claims proven here
 //
-//   T23. AddCell inserts a cell at the specified index
-//   T24. AddCell appends when CellIdx == len(cells)
-//   T25. EditCell replaces cell source at CellRef.Index
-//   T26. DeleteCell removes cell from the middle
-//   T27. DeleteCell on single-cell notebook leaves empty cells array
-//   T28. Notebook round-trip preserves metadata + nbformat fields
-//   T29. AddCell with index > len(cells) returns ErrCellIndexOutOfBounds
-//   T30. EditCell with invalid CellRef returns ErrCellIndexOutOfBounds
-//   T31. HandlersComplete — every OpKind in AllOpKinds() is in handlers
+//	T23. AddCell inserts a cell at the specified index
+//	T24. AddCell appends when CellIdx == len(cells)
+//	T25. EditCell replaces cell source at CellRef.Index
+//	T26. DeleteCell removes cell from the middle
+//	T27. DeleteCell on single-cell notebook leaves empty cells array
+//	T28. Notebook round-trip preserves metadata + nbformat fields
+//	T29. AddCell with index > len(cells) returns ErrCellIndexOutOfBounds
+//	T30. EditCell with invalid CellRef returns ErrCellIndexOutOfBounds
+//	T31. HandlersComplete — every OpKind in AllOpKinds() is in handlers
 package projector
 
 import (
@@ -346,7 +346,7 @@ func TestThesis_EditCell_InvalidRef_Errors(t *testing.T) {
 		name string
 		idx  int
 	}{
-		{"past end", 3},  // cells are 0,1,2 — index 3 is OOB
+		{"past end", 3}, // cells are 0,1,2 — index 3 is OOB
 		{"way past", 99},
 	}
 

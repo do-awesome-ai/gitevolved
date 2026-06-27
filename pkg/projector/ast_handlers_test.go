@@ -3,18 +3,18 @@
 //
 // # Thesis claims proven here
 //
-//   T11. AddDecl inserts at file end, rejects duplicates
-//   T12. EditDecl locates + replaces a named declaration's body
-//   T13. DeleteDecl removes lines of a named declaration
-//   T14. RenameSymbol replaces all occurrences within file scope
-//   T15. AddFunction appends a new function, rejects duplicates
-//   T16. DeleteFunction removes matching function block
-//   T17. RewriteFunction replaces function body while preserving sig
-//   T18. EditStatement splices byte range within function body
-//   T19. AddImport inserts into existing import block
-//   T20. RemoveImport deletes the import line
-//   T21. EditImport renames the module in the import line
-//   T22. HandlerCoverage — all 17 OpKinds (14 handlers + 3 unsupported) wired
+//	T11. AddDecl inserts at file end, rejects duplicates
+//	T12. EditDecl locates + replaces a named declaration's body
+//	T13. DeleteDecl removes lines of a named declaration
+//	T14. RenameSymbol replaces all occurrences within file scope
+//	T15. AddFunction appends a new function, rejects duplicates
+//	T16. DeleteFunction removes matching function block
+//	T17. RewriteFunction replaces function body while preserving sig
+//	T18. EditStatement splices byte range within function body
+//	T19. AddImport inserts into existing import block
+//	T20. RemoveImport deletes the import line
+//	T21. EditImport renames the module in the import line
+//	T22. HandlerCoverage — all 17 OpKinds (14 handlers + 3 unsupported) wired
 package projector
 
 import (

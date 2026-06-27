@@ -3,24 +3,24 @@
 //
 // # Thesis claims proven here
 //
-//   X1. RenameVsRemoteReference     — RenameSymbol(getUser) in auth.go +
-//                                      EditStatement referencing getUser in
-//                                      session.go → CrossFileSuspect
-//   X2. DeleteFunctionVsReference   — DeleteFunction(getUser) + remote
-//                                      AddFunction body calling getUser →
-//                                      CrossFileSuspect
-//   X3. DeleteDeclVsReference       — DeleteDecl(Config) + remote EditDecl
-//                                      referencing Config → CrossFileSuspect
-//   X4. SubstringDoesNotMatch       — getUser change vs remote body that only
-//                                      contains getUserProfile → Independent
-//   X5. SameFileUnaffected          — same-file pairs never reach the
-//                                      cross-file path; existing verdicts hold
-//   X6. Symmetric                   — Detect(a,b) == Detect(b,a) for the new
-//                                      cross-file pairs
-//   X7. NonReferencingStaysIndependent — identity change + unrelated remote
-//                                         body → Independent
-//   X8. AddRewriteNotIdentityChange — AddFunction / RewriteFunction are NOT
-//                                      identity changers (documented limit)
+//	X1. RenameVsRemoteReference     — RenameSymbol(getUser) in auth.go +
+//	                                   EditStatement referencing getUser in
+//	                                   session.go → CrossFileSuspect
+//	X2. DeleteFunctionVsReference   — DeleteFunction(getUser) + remote
+//	                                   AddFunction body calling getUser →
+//	                                   CrossFileSuspect
+//	X3. DeleteDeclVsReference       — DeleteDecl(Config) + remote EditDecl
+//	                                   referencing Config → CrossFileSuspect
+//	X4. SubstringDoesNotMatch       — getUser change vs remote body that only
+//	                                   contains getUserProfile → Independent
+//	X5. SameFileUnaffected          — same-file pairs never reach the
+//	                                   cross-file path; existing verdicts hold
+//	X6. Symmetric                   — Detect(a,b) == Detect(b,a) for the new
+//	                                   cross-file pairs
+//	X7. NonReferencingStaysIndependent — identity change + unrelated remote
+//	                                      body → Independent
+//	X8. AddRewriteNotIdentityChange — AddFunction / RewriteFunction are NOT
+//	                                   identity changers (documented limit)
 package conflict
 
 import (

@@ -15,7 +15,7 @@
 //   - AddFile      — pre==nil, post!=nil
 //   - DeleteFile   — pre!=nil, post==nil
 //   - RewriteRegion — pre!=nil, post!=nil, computed via minimal-range diff
-//                     (longest common prefix + suffix)
+//     (longest common prefix + suffix)
 //
 // AST-based extraction (AddFunction / EditFunction / RenameSymbol /
 // EditStatement / AddDecl / etc.) ships in Phase 1.1 ALONGSIDE the

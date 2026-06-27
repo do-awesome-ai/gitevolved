@@ -7,16 +7,16 @@
 //
 // # Thesis claims proven here
 //
-//   T1. Deterministic           — same (state, ops) → byte-identical output
-//   T2. StateImmutable          — input state unchanged after Project / ApplyOp
-//   T3. TrivialOpsCompose       — AddFile + RewriteRegion + DeleteFile compose
-//   T4. SequenceComposition     — Project(state, [a,b,c]) == ApplyOp(ApplyOp(ApplyOp(state,a),b),c)
-//   T5. HandlerCoverage         — every OpKind has exactly one of {handler, unsupported}
-//   T6. UnsupportedOpsAreNamed  — AST-requiring ops return ErrUnsupportedOp, never silent corruption
-//   T7. AddFileStrict           — adding to existing path returns ErrPathAlreadyExists
-//   T8. DeleteFileStrict        — deleting missing path returns ErrPathNotFound
-//   T9. RewriteRegionBoundsSafe — out-of-bounds returns ErrRangeOutOfBounds (no panic)
-//   T10. PartialStateOnError    — failing op returns state UP TO the failure + named error
+//	T1. Deterministic           — same (state, ops) → byte-identical output
+//	T2. StateImmutable          — input state unchanged after Project / ApplyOp
+//	T3. TrivialOpsCompose       — AddFile + RewriteRegion + DeleteFile compose
+//	T4. SequenceComposition     — Project(state, [a,b,c]) == ApplyOp(ApplyOp(ApplyOp(state,a),b),c)
+//	T5. HandlerCoverage         — every OpKind has exactly one of {handler, unsupported}
+//	T6. UnsupportedOpsAreNamed  — AST-requiring ops return ErrUnsupportedOp, never silent corruption
+//	T7. AddFileStrict           — adding to existing path returns ErrPathAlreadyExists
+//	T8. DeleteFileStrict        — deleting missing path returns ErrPathNotFound
+//	T9. RewriteRegionBoundsSafe — out-of-bounds returns ErrRangeOutOfBounds (no panic)
+//	T10. PartialStateOnError    — failing op returns state UP TO the failure + named error
 package projector
 
 import (

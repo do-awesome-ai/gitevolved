@@ -7,13 +7,13 @@
 // with a known State + op-log + fixed dates, then asserts the
 // observable invariants the thesis claims:
 //
-//   T1. ForwardOnlyFidelity        export -> fresh clone -> checkout -> State byte-equal
-//   T2. TrailersIncludeAllOps      every envelope produces an X-DoSource-Operation trailer
-//   T3. DeterministicSHA            same input + fixed dates -> same commit SHA
-//   T4. StateDeletesRemovesFile    file in HEAD but not in new state is removed
-//   T5. RejectsNonRepoPath         non-git path -> ErrNotAGitRepo
-//   T6. RejectsPathTraversalKeys   "../escape" key -> ErrPathTraversal
-//   T7. RejectsMissingDates        zero AuthorDate -> ErrMissingDates
+//	T1. ForwardOnlyFidelity        export -> fresh clone -> checkout -> State byte-equal
+//	T2. TrailersIncludeAllOps      every envelope produces an X-DoSource-Operation trailer
+//	T3. DeterministicSHA            same input + fixed dates -> same commit SHA
+//	T4. StateDeletesRemovesFile    file in HEAD but not in new state is removed
+//	T5. RejectsNonRepoPath         non-git path -> ErrNotAGitRepo
+//	T6. RejectsPathTraversalKeys   "../escape" key -> ErrPathTraversal
+//	T7. RejectsMissingDates        zero AuthorDate -> ErrMissingDates
 //
 // # Why hermetic real-git
 //
@@ -97,9 +97,9 @@ func sealOps(t *testing.T, ops ...operation.Operation) []*operation.Envelope {
 func TestThesis_ForwardOnlyFidelity(t *testing.T) {
 	repo := initRepo(t)
 	state := projector.State{
-		"auth.go":     []byte("package auth\n\nfunc validateToken() error { return nil }\n"),
-		"sub/dir.go":  []byte("package sub\n"),
-		"empty.txt":   []byte(""),
+		"auth.go":    []byte("package auth\n\nfunc validateToken() error { return nil }\n"),
+		"sub/dir.go": []byte("package sub\n"),
+		"empty.txt":  []byte(""),
 	}
 	envs := sealOps(t,
 		&operation.AddFile{Path: "auth.go", Content: state["auth.go"]},

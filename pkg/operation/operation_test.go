@@ -8,16 +8,16 @@
 //
 // # Thesis claims proven here
 //
-//   T1. ContentAddressableOps  — same body + same causal parents → same op_id
-//   T2. CausalParentsAreIdentity — same body, different parents → different op_id
-//   T3. MetadataNotInIdentity   — same body + parents, different session/turn/time → same op_id
-//   T4. RoundTripLossless       — every op kind survives marshal/seal/unmarshal/decode
-//   T5. DiscriminatorSafety     — unknown op_type returns ErrUnknownOpType, never panics
-//   T6. SchemaVersionSafety     — unknown schema_version returns ErrUnknownSchemaVersion
-//   T7. ValidationAtBoundary    — every op rejects empty/invalid fields at Seal/Decode time
-//   T8. RegistryCoverage        — every OpKind in AllOpKinds() has a registered factory
-//   T9. CanonicalFormStable     — same logical content → byte-identical canonical form
-//   T10. CausalParentsSorted    — Seal sorts causal_parents so order at construction doesn't affect op_id
+//	T1. ContentAddressableOps  — same body + same causal parents → same op_id
+//	T2. CausalParentsAreIdentity — same body, different parents → different op_id
+//	T3. MetadataNotInIdentity   — same body + parents, different session/turn/time → same op_id
+//	T4. RoundTripLossless       — every op kind survives marshal/seal/unmarshal/decode
+//	T5. DiscriminatorSafety     — unknown op_type returns ErrUnknownOpType, never panics
+//	T6. SchemaVersionSafety     — unknown schema_version returns ErrUnknownSchemaVersion
+//	T7. ValidationAtBoundary    — every op rejects empty/invalid fields at Seal/Decode time
+//	T8. RegistryCoverage        — every OpKind in AllOpKinds() has a registered factory
+//	T9. CanonicalFormStable     — same logical content → byte-identical canonical form
+//	T10. CausalParentsSorted    — Seal sorts causal_parents so order at construction doesn't affect op_id
 package operation
 
 import (
@@ -273,7 +273,7 @@ func TestThesis_ValidationAtBoundary(t *testing.T) {
 		{"AddFunction invalid language", &AddFunction{Path: "a", Name: "f", Signature: "func f()", Language: "klingon"}, ErrInvalidEnum},
 		{"EditStatement invalid range", &EditStatement{Path: "a", FuncRef: "f", StmtRange: Range{Start: 5, End: 5}, NewText: "x"}, ErrInvalidRange},
 		{"RenameSymbol no-op rename", &RenameSymbol{Path: "a", OldName: "X", NewName: "X", Scope: ScopeRef{Path: "a"}}, nil}, // string-match on message
-		{"EditImport no-op", &EditImport{Path: "a", OldModule: "fmt", NewModule: "fmt"}, nil},                              // string-match on message
+		{"EditImport no-op", &EditImport{Path: "a", OldModule: "fmt", NewModule: "fmt"}, nil},                                // string-match on message
 		{"AddCell invalid kind", &AddCell{Notebook: "n", CellIdx: 0, Kind_: "video"}, ErrInvalidEnum},
 		{"RewriteRegion negative start", &RewriteRegion{Path: "a", ByteRange: Range{Start: -1, End: 5}}, ErrInvalidRange},
 	}

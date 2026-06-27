@@ -815,7 +815,6 @@ func removeImportFromSource(src, module string) string {
 	return strings.Join(result, "\n")
 }
 
-
 // isIdentifier reports whether s looks like a source-code identifier:
 // non-empty, starts with letter or underscore, contains only letters,
 // digits, underscores.
@@ -973,4 +972,3 @@ func detectLanguage(path string) operation.Language {
 		return operation.LanguageNotApplicable
 	}
 }
-

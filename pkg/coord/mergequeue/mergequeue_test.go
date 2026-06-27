@@ -22,10 +22,10 @@ func makeBundle(sessionID, bundleID, parentSHA string, paths ...string) BundleRe
 		}
 	}
 	return BundleRef{
-		SessionID: sessionID,
-		BundleID:  bundleID,
-		ParentSHA: parentSHA,
-		Ops:       ops,
+		SessionID:  sessionID,
+		BundleID:   bundleID,
+		ParentSHA:  parentSHA,
+		Ops:        ops,
 		EnqueuedAt: time.Now(),
 	}
 }
