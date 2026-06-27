@@ -1,22 +1,24 @@
 <!doctype html>
 <!--
-  gitevolved.ai — landing page for the open-source local doSource client.
-  Self-contained single file (inline CSS, no build step, no JS deps) so it deploys
-  as a [do] App's public/index.html, a static host, or GitHub Pages unchanged.
-  On-thesis: "git, evolved" — keep git the engine, evolve the experience.
-  Built 2026-06-27. Repo: https://github.com/do-awesome-ai/gitevolved
+  gitevolved.ai — landing page. Self-contained single file (inline CSS, no build).
+  Positioning: problem (line-based merge invents false conflicts) → solution
+  (merge by operation, not by line) → why now (AI parallelism). Honest: only
+  NON-OVERLAPPING edits auto-merge; real overlaps still need a human.
+  MOAT-SAFE: describes outcomes + the open client only — never the closed cloud's
+  coordination mechanism. Source of truth; deploys to gh-pages → gitevolved.ai.
+  Rewritten 2026-06-27 (multi-lens copy pass: senior-dev / newcomer / positioning).
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>gitevolved — git, evolved</title>
-<meta name="description" content="A semantic, offline-first local engine for source control that understands your code as typed operations, not text diffs. The open-source front door to doSource." />
+<title>gitevolved — git that merges by meaning, not by lines</title>
+<meta name="description" content="gitevolved is git that merges by what changed, not by text lines — so non-overlapping edits to the same file merge automatically, no conflict. Your team and your AI agents work on the same code at once and stay in sync. Still git: git push origin works exactly as today. Open source, Apache-2.0." />
 <style>
   :root{
     --bg:#0b0d12; --bg2:#0f1219; --panel:#12151d; --line:#222734;
     --ink:#e8ecf4; --muted:#99a3b5; --dim:#6b7689;
-    --accent:#5eead4; --accent2:#7c9cff; --warn:#f0b072;
+    --accent:#5eead4; --accent2:#7c9cff; --warn:#f0b072; --bad:#f0726f;
     --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
   }
@@ -27,7 +29,6 @@
   .wrap{max-width:980px;margin:0 auto;padding:0 24px}
   .mono{font-family:var(--mono)}
 
-  /* nav */
   nav{display:flex;align-items:center;justify-content:space-between;
     padding:22px 0;border-bottom:1px solid var(--line)}
   .brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:-.02em}
@@ -37,20 +38,18 @@
   .navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}
   .navlinks a:hover{color:var(--ink)}
 
-  /* hero */
-  header{padding:88px 0 64px;position:relative;overflow:hidden}
+  header{padding:84px 0 60px;position:relative;overflow:hidden}
   header::before{content:"";position:absolute;inset:-40% 0 auto 0;height:520px;
-    background:radial-gradient(60% 60% at 50% 0%,rgba(94,234,212,.10),transparent 70%);
-    pointer-events:none}
+    background:radial-gradient(60% 60% at 50% 0%,rgba(94,234,212,.10),transparent 70%);pointer-events:none}
   .eyebrow{font-family:var(--mono);font-size:13px;color:var(--accent);
     letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
-  h1{font-size:clamp(40px,7vw,72px);line-height:1.02;letter-spacing:-.03em;margin:0 0 22px;
-    font-weight:700}
+  h1{font-size:clamp(36px,6vw,64px);line-height:1.04;letter-spacing:-.03em;margin:0 0 22px;font-weight:700}
   h1 .ev{background:linear-gradient(120deg,var(--accent),var(--accent2));
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:640px;margin:0 0 34px}
+  .lede{font-size:clamp(17px,2.3vw,20px);color:var(--muted);max-width:680px;margin:0 0 18px}
   .lede b{color:var(--ink);font-weight:600}
-  .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .honest{font-size:14.5px;color:var(--dim);max-width:680px;margin:0 0 32px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:11px;
     font-weight:600;font-size:15px;border:1px solid transparent;transition:.15s}
   .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06231f}
@@ -58,28 +57,44 @@
   .btn.ghost{border-color:var(--line);color:var(--ink);background:var(--panel)}
   .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
 
-  /* terminal */
-  .term{margin:54px 0 0;background:var(--bg2);border:1px solid var(--line);
+  .term{margin:46px 0 0;background:var(--bg2);border:1px solid var(--line);
     border-radius:14px;overflow:hidden;box-shadow:0 30px 80px -40px rgba(0,0,0,.8)}
   .term .bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
   .term .bar i{width:11px;height:11px;border-radius:50%;background:#2a3040;display:inline-block}
   .term .bar span{margin-left:10px;color:var(--dim);font-family:var(--mono);font-size:12px}
-  .term pre{margin:0;padding:20px 22px;font-family:var(--mono);font-size:14px;line-height:1.85;
-    overflow-x:auto}
+  .term pre{margin:0;padding:20px 22px;font-family:var(--mono);font-size:14px;line-height:1.85;overflow-x:auto}
   .c-prompt{color:var(--accent2)} .c-cmd{color:var(--ink)} .c-cm{color:var(--dim)}
-  .c-ok{color:var(--accent)}
+  .c-ok{color:var(--accent)} .c-bad{color:var(--bad)}
 
-  /* sections */
-  section{padding:64px 0;border-top:1px solid var(--line)}
-  h2{font-size:clamp(26px,4vw,36px);letter-spacing:-.02em;margin:0 0 12px;font-weight:680}
-  .sub{color:var(--muted);max-width:620px;margin:0 0 38px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(25px,3.6vw,34px);letter-spacing:-.02em;margin:0 0 14px;font-weight:680}
+  .sub{color:var(--muted);max-width:640px;margin:0 0 30px;font-size:16.5px}
+  .sub b{color:var(--ink);font-weight:600}
+
+  /* before/after proof */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  @media(max-width:680px){.vs{grid-template-columns:1fr}}
+  .vs .col{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .vs .col.bad{border-color:rgba(240,114,111,.35)}
+  .vs .col.good{border-color:rgba(94,234,212,.35)}
+  .vs .tag{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
+  .vs .bad .tag{color:var(--bad)} .vs .good .tag{color:var(--accent)}
+  .vs code{font-family:var(--mono);font-size:13px;color:var(--ink);display:block;
+    background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:0 0 12px;white-space:pre-wrap}
+  .vs p{margin:0;color:var(--muted);font-size:14.5px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
   .card h3{margin:0 0 8px;font-size:17px;letter-spacing:-.01em}
   .card .k{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:14px;display:block}
   .card p{margin:0;color:var(--muted);font-size:14.5px}
 
-  /* split */
+  .agentbox{background:linear-gradient(180deg,rgba(124,156,255,.06),transparent);
+    border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:8px}
+  .agentbox .paste{font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--bg);
+    border:1px solid var(--accent);border-radius:10px;padding:16px 18px;margin:14px 0 8px;line-height:1.6}
+  .agentbox small{color:var(--dim);font-size:13.5px}
+
   .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
   @media(max-width:760px){.split{grid-template-columns:1fr}}
   .split ul{list-style:none;padding:0;margin:0}
@@ -100,95 +115,121 @@
   <nav>
     <div class="brand"><span class="dot"></span> <b>gitevolved</b></div>
     <div class="navlinks">
-      <a href="#how">How it works</a>
+      <a href="#problem">Why</a>
       <a href="#install">Install</a>
+      <a href="https://docs.gitevolved.ai">Docs</a>
       <a href="https://github.com/do-awesome-ai/gitevolved">GitHub ↗</a>
     </div>
   </nav>
 
   <header>
-    <div class="eyebrow">open source · apache-2.0</div>
-    <h1>git, <span class="ev">evolved</span>.</h1>
-    <p class="lede">A semantic, offline-first engine for source control that understands your
-      code as <b>typed operations</b> — not text diffs. It teaches git a smarter transport, so
-      <b class="mono">git&nbsp;clone&nbsp;dosource://…</b> and <b class="mono">git&nbsp;push&nbsp;dosource://…</b>
-      just work — while <b>git push origin stays completely untouched.</b></p>
+    <div class="eyebrow">open source · apache-2.0 · still git</div>
+    <h1>Your team and your AI agents, on the same code at once —<br><span class="ev">without the conflicts that never needed to happen.</span></h1>
+    <p class="lede">gitevolved is a free upgrade to git that merges by <b>what changed</b> —
+      you added a function, your teammate renamed another — not by text lines. So when two
+      people edit different parts of the same file, <b>both edits just apply.</b> It's still
+      git: <span class="mono">git&nbsp;push&nbsp;origin</span> to GitHub works exactly as today.</p>
+    <p class="honest">Honest version: edits that genuinely touch the <em>same</em> code still
+      ask a human — gitevolved just stops inventing the conflicts that don't.</p>
     <div class="cta">
-      <a class="btn primary" href="#install">Get started</a>
+      <a class="btn primary" href="#install">Install with your AI agent</a>
       <a class="btn ghost" href="https://github.com/do-awesome-ai/gitevolved">View on GitHub →</a>
     </div>
 
     <div class="term">
-      <div class="bar"><i></i><i></i><i></i><span>~/my-project</span></div>
-<pre><span class="c-cm"># clone a hosted repo straight from the cloud — it's just a git remote</span>
-<span class="c-prompt">$</span> <span class="c-cmd">git clone dosource://cloud/my-repo</span>
-<span class="c-ok">Cloning into 'my-repo'... done.</span>
+      <div class="bar"><i></i><i></i><i></i><span>~/our-app</span></div>
+<pre><span class="c-cm"># it's just a git remote — clone a hosted repo straight from the cloud</span>
+<span class="c-prompt">$</span> <span class="c-cmd">git clone dosource://cloud/our-app</span>
+<span class="c-ok">Cloning into 'our-app'... done.</span>
 
-<span class="c-cm"># edit, commit, push — semantic, offline-aware, no ceremony</span>
-<span class="c-prompt">$</span> <span class="c-cmd">git push dosource://cloud/my-repo main</span>
-<span class="c-ok">  * [new branch]      main -&gt; main</span>
+<span class="c-cm"># you and a teammate push the same file at the same moment — both land</span>
+<span class="c-prompt">$</span> <span class="c-cmd">git push dosource://cloud/our-app</span>
+<span class="c-ok">  both changes saved. no conflict to resolve.</span>
 
-<span class="c-cm"># your existing GitHub workflow is never disturbed</span>
+<span class="c-cm"># your GitHub workflow is never touched</span>
 <span class="c-prompt">$</span> <span class="c-cmd">git push origin main</span>   <span class="c-cm"># works exactly as before</span></pre>
     </div>
   </header>
 
+  <section id="problem">
+    <h2>Git flags conflicts that never needed to happen.</h2>
+    <p class="sub">Git merges text line-by-line, so it stops you with a conflict whenever two
+      edits land near each other — <b>even when they don't actually clash.</b> You change the
+      top of a file, your teammate changes the bottom, and git still makes someone untangle it
+      by hand. Now add AI: one developer runs several coding assistants, all editing the same
+      repo, producing changes faster than anyone can merge them. The work stops being writing
+      code and starts being resolving merges that line-diffing invented.</p>
+  </section>
+
   <section id="how">
-    <h2>An edit is an operation, not a diff.</h2>
-    <p class="sub">Most tools see a commit as changed lines. gitevolved records what you actually
-      did — add a function, rename a symbol, rewrite a region — so merges resolve at the level of
-      meaning, not line numbers.</p>
+    <h2>Merge by meaning, not by lines.</h2>
+    <p class="sub">gitevolved records what you <b>did</b> — added a function, renamed a symbol,
+      rewrote a block — as a structured change, not just which lines moved. Edits to different
+      parts of a file are different changes, so they combine cleanly and both land with nothing
+      to resolve. When two people genuinely change the same code, gitevolved still asks a human.
+      Underneath it runs your real, installed git (it never forks it), so clone / commit / push
+      behave exactly as you expect.</p>
     <div class="grid">
-      <div class="card">
-        <span class="k">typed operations</span>
-        <h3>Structured, not textual</h3>
-        <p>Files are projections of an append-only log of typed operations. The unit of history is intent.</p>
+      <div class="card"><span class="k">operations, not lines</span><h3>Records the change</h3>
+        <p>It knows you added a function vs. moved a line — so non-overlapping edits combine instead of colliding.</p></div>
+      <div class="card"><span class="k">still git</span><h3>Nothing you do breaks</h3>
+        <p>Every git command you know still works. <span class="mono">git push origin</span> to GitHub is untouched. No fork.</p></div>
+      <div class="card"><span class="k">works offline</span><h3>Runs on your laptop</h3>
+        <p>The engine is local. No account needed to record, merge, or export to a normal git commit.</p></div>
+      <div class="card"><span class="k">open source</span><h3>Free, Apache-2.0</h3>
+        <p>The local tool is free forever. Read every line; contribute under the DCO.</p></div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <h2>Two writers, one file, both landed.</h2>
+    <p class="sub">We ran it: two developers pushed changes to the same file at the same moment.</p>
+    <div class="vs">
+      <div class="col bad">
+        <div class="tag">plain git</div>
+        <code>CONFLICT (content):
+merge conflict in app.go</code>
+        <p>Everyone stops. Someone reads the conflict markers and merges it by hand before anyone can move on.</p>
       </div>
-      <div class="card">
-        <span class="k">semantic merge</span>
-        <h3>Conflicts that mean something</h3>
-        <p>Two functions added to the same file are independent — not a textual conflict to hand-resolve.</p>
-      </div>
-      <div class="card">
-        <span class="k">offline-first</span>
-        <h3>Works on a plane</h3>
-        <p>The engine runs fully on your laptop. No cloud account needed to record, project, or export.</p>
-      </div>
-      <div class="card">
-        <span class="k">stock git, no fork</span>
-        <h3>No GPL contagion</h3>
-        <p>It shells out to the <em>real</em> git via <span class="mono">os/exec</span> — never links git internals. Apache-2.0.</p>
+      <div class="col good">
+        <div class="tag">gitevolved</div>
+        <code>both changes saved.
+0 conflicts.</code>
+        <p>Both edits landed automatically. Neither developer had to stop and resolve anything.</p>
       </div>
     </div>
   </section>
 
   <section id="install">
-    <h2>Install in 60 seconds.</h2>
-    <p class="sub">Pure Go standard library. No node, no npm, no cloud account to build or run.</p>
+    <h2>Let your AI agent install it.</h2>
+    <p class="sub">gitevolved is built for the AI-agent era — so the easiest way to set it up is
+      to let your agent do it. Paste this to Claude Code, Codex, Gemini, or any coding agent:</p>
+    <div class="agentbox">
+      <div class="paste">Install gitevolved from github.com/do-awesome-ai/gitevolved, then make sure <span class="mono">git clone dosource://cloud/&lt;repo&gt;</span> works.</div>
+      <small>Your agent reads the repo's <span class="mono">AGENTS.md</span>, runs a couple of commands, and you're done.</small>
+    </div>
+    <p class="sub" style="margin-top:34px">Prefer to do it yourself? One command (needs Go):</p>
     <div class="term">
       <div class="bar"><i></i><i></i><i></i><span>install</span></div>
-<pre><span class="c-prompt">$</span> <span class="c-cmd">git clone https://github.com/do-awesome-ai/gitevolved</span>
-<span class="c-prompt">$</span> <span class="c-cmd">cd gitevolved && ./install.sh</span>
-<span class="c-ok">Installed: gitevolved dosourced git-remote-dosource → ~/.local/bin</span>
-
-<span class="c-cm"># now dosource:// is a git remote — clone anything hosted</span>
-<span class="c-prompt">$</span> <span class="c-cmd">git clone dosource://cloud/&lt;repo&gt;</span></pre>
+<pre><span class="c-prompt">$</span> <span class="c-cmd">go install github.com/do-awesome-ai/gitevolved/cmd/git-remote-dosource@latest</span>
+<span class="c-ok"># now: git clone dosource://cloud/&lt;repo&gt;</span></pre>
     </div>
+    <p class="sub" style="margin-top:16px;font-size:14.5px;color:var(--dim)">Full install (all three tools, or no-Go prebuilt binaries) → <a style="color:var(--accent)" href="https://docs.gitevolved.ai">docs.gitevolved.ai</a></p>
   </section>
 
   <section>
     <div class="split">
       <div>
-        <h2>Free where it should be. Paid where it's hard.</h2>
-        <p class="sub">The local client is fully functional and free, forever. The cloud
-          coordination referee — multi-machine teams, the CAS-fenced shared mainline — is the
-          paid layer. A solo developer never has to pay.</p>
+        <h2>Free where it should be.</h2>
+        <p class="sub">The local tool is free and open-source, forever — a genuinely better git
+          for you and your machine. A paid hosted cloud keeps a whole team, and all their agents,
+          working on the same codebase in sync. A solo developer never has to pay.</p>
       </div>
       <ul>
-        <li><b>Open &amp; free:</b> the engine, projector, conflict detector, daemon, and the git remote-helper.</li>
-        <li><b>Yours, offline:</b> semantic merge + a real op-log on your own machine, zero cloud.</li>
-        <li><b>Paid cloud:</b> team sync, hosted storage, the coordinated mainline.</li>
-        <li><b>Never crippleware:</b> the free tier is a genuinely better git, not a trial.</li>
+        <li><b>Open &amp; free:</b> the local engine, the merge, the git remote-helper — all of it.</li>
+        <li><b>Yours, offline:</b> a real history of your changes on your own machine, zero cloud.</li>
+        <li><b>Team cloud (paid):</b> everyone — people and agents — stays in sync on one codebase.</li>
+        <li><b>Never crippleware:</b> the free tier is the real thing, not a trial.</li>
       </ul>
     </div>
   </section>
@@ -197,12 +238,12 @@
     <div class="row">
       <div>
         <div class="brand" style="margin-bottom:10px"><span class="dot"></span> <b>gitevolved</b></div>
-        <div>The open-source front door to doSource. Don't replace git — evolve it.</div>
+        <div>git, evolved — keep git, evolve the experience.</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start">
-        <span class="pill">Apache-2.0</span>
-        <span class="pill">DCO</span>
+        <a class="pill" href="https://docs.gitevolved.ai">docs</a>
         <a class="pill" href="https://github.com/do-awesome-ai/gitevolved">github ↗</a>
+        <span class="pill">Apache-2.0</span>
       </div>
     </div>
   </footer>
