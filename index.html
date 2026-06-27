@@ -89,11 +89,15 @@
   .card .k{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:14px;display:block}
   .card p{margin:0;color:var(--muted);font-size:14.5px}
 
-  .agentbox{background:linear-gradient(180deg,rgba(124,156,255,.06),transparent);
-    border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:8px}
+  .agentbox{background:linear-gradient(180deg,rgba(124,156,255,.08),transparent);
+    border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-top:40px}
+  .agentbox.hero{border-color:rgba(94,234,212,.35);box-shadow:0 30px 80px -50px rgba(94,234,212,.4)}
+  .agentbox .agentlabel{font-family:var(--mono);font-size:12px;color:var(--accent);
+    letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
   .agentbox .paste{font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--bg);
-    border:1px solid var(--accent);border-radius:10px;padding:16px 18px;margin:14px 0 8px;line-height:1.6}
+    border:1px solid var(--accent);border-radius:10px;padding:16px 18px;margin:12px 0 10px;line-height:1.6}
   .agentbox small{color:var(--dim);font-size:13.5px}
+  .agentbox small a{color:var(--accent)}
 
   .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
   @media(max-width:760px){.split{grid-template-columns:1fr}}
@@ -136,18 +140,10 @@
       <a class="btn ghost" href="https://github.com/do-awesome-ai/gitevolved">View on GitHub →</a>
     </div>
 
-    <div class="term">
-      <div class="bar"><i></i><i></i><i></i><span>~/our-app</span></div>
-<pre><span class="c-cm"># it's just a git remote — clone a hosted repo straight from the cloud</span>
-<span class="c-prompt">$</span> <span class="c-cmd">git clone dosource://cloud/our-app</span>
-<span class="c-ok">Cloning into 'our-app'... done.</span>
-
-<span class="c-cm"># you and a teammate push the same file at the same moment — both land</span>
-<span class="c-prompt">$</span> <span class="c-cmd">git push dosource://cloud/our-app</span>
-<span class="c-ok">  both changes saved. no conflict to resolve.</span>
-
-<span class="c-cm"># your GitHub workflow is never touched</span>
-<span class="c-prompt">$</span> <span class="c-cmd">git push origin main</span>   <span class="c-cm"># works exactly as before</span></pre>
+    <div class="agentbox hero">
+      <div class="agentlabel">Install — built AI-first, so let your agent do it</div>
+      <div class="paste">Install gitevolved from github.com/do-awesome-ai/gitevolved, then make sure <span class="mono">git clone dosource://cloud/&lt;repo&gt;</span> works.</div>
+      <small>Paste that to Claude Code, Codex, Gemini, Aider — any coding agent. It reads the repo's <span class="mono">AGENTS.md</span> and sets everything up. &nbsp;·&nbsp; <a href="#install">prefer to install it yourself? →</a></small>
     </div>
   </header>
 
@@ -198,17 +194,25 @@ merge conflict in app.go</code>
         <p>Both edits landed automatically. Neither developer had to stop and resolve anything.</p>
       </div>
     </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>~/our-app</span></div>
+<pre><span class="c-cm"># it's just a git remote — clone a hosted repo straight from the cloud</span>
+<span class="c-prompt">$</span> <span class="c-cmd">git clone dosource://cloud/our-app</span>
+<span class="c-ok">Cloning into 'our-app'... done.</span>
+
+<span class="c-cm"># you and a teammate push the same file at the same moment — both land</span>
+<span class="c-prompt">$</span> <span class="c-cmd">git push dosource://cloud/our-app</span>
+<span class="c-ok">  both changes saved. no conflict to resolve.</span>
+
+<span class="c-cm"># your GitHub workflow is never touched</span>
+<span class="c-prompt">$</span> <span class="c-cmd">git push origin main</span>   <span class="c-cm"># works exactly as before</span></pre>
+    </div>
   </section>
 
   <section id="install">
-    <h2>Let your AI agent install it.</h2>
-    <p class="sub">gitevolved is built for the AI-agent era — so the easiest way to set it up is
-      to let your agent do it. Paste this to Claude Code, Codex, Gemini, or any coding agent:</p>
-    <div class="agentbox">
-      <div class="paste">Install gitevolved from github.com/do-awesome-ai/gitevolved, then make sure <span class="mono">git clone dosource://cloud/&lt;repo&gt;</span> works.</div>
-      <small>Your agent reads the repo's <span class="mono">AGENTS.md</span>, runs a couple of commands, and you're done.</small>
-    </div>
-    <p class="sub" style="margin-top:34px">Prefer to do it yourself? One command (needs Go):</p>
+    <h2>Install it yourself.</h2>
+    <p class="sub">The easiest path is to let your AI agent do it (top of the page). Prefer to
+      run it by hand? One command (needs Go):</p>
     <div class="term">
       <div class="bar"><i></i><i></i><i></i><span>install</span></div>
 <pre><span class="c-prompt">$</span> <span class="c-cmd">go install github.com/do-awesome-ai/gitevolved/cmd/git-remote-dosource@latest</span>
